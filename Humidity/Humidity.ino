@@ -4,7 +4,7 @@
 
 #include <avr/sleep.h>
 
-#define DHT11_PIN 3
+#define DHT_PIN 3
 dht DHT;
 
 #define CHIP_SELECT_PIN 4
@@ -13,12 +13,12 @@ dht DHT;
 
 #define ID_FILE "/id.txt"
 
-uint8_t buffer[512];
-
 char SSID[] = "Please set SSID";
 char NETWORKKEY[] = "Please set PASSWORD";
 char API_HOST[] = "Please set host IP address";
 char API_PATH[] = "Please set host API path";
+
+uint8_t buffer[512];
 
 int ID = 0;
 uint32_t nextSequenceId = 0;
@@ -205,7 +205,8 @@ void loop() {
   digitalWrite(13,HIGH);
 
   //### Make Parameter ###
-  int chk = DHT.read11(DHT11_PIN);
+//  int chk = DHT.read11(DHT_PIN);
+  int chk = DHT.read22(DHT_PIN);
   if ( chk != 0 ){
     Serial.println(F("Fail to read humidity."));
     delay(1000);
@@ -287,4 +288,5 @@ void delaySleep(unsigned long t) {
     }
   }
 }
+
 
